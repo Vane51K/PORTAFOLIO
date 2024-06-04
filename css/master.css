@@ -1,0 +1,207 @@
+body {
+    background-color: #DFCCFB;
+    color: black;
+    margin: 0;
+}
+
+h1 {
+    font-family: "Hello Hanna", sans-serif;
+}
+
+p {
+    font-family: "Century Gothic", sans-serif;
+}
+
+button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: #7e97b8;
+    background-color: #e0e8ef;
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgba(255, 255, 255, 0.333);
+    border-radius: 40px;
+    padding: 16px 24px;
+    transform: translate(0px, 0px) rotate(0deg);
+    transition: 0.2s;
+    box-shadow: -4px -2px 16px 0px #ffffff, 4px 2px 16px 0px rgb(95 157 231 / 48%);
+    margin: 10px; /* Ajusta el valor según necesites */
+}
+
+button:hover {
+    color: #516d91;
+    background-color: #E5EDF5;
+    box-shadow: -2px -1px 8px 0px #ffffff, 2px 1px 8px 0px rgb(95 157 231 / 48%);
+}
+
+button:active {
+    box-shadow: none;
+}
+
+button.left {
+    left: 10px; /* Ajusta el valor según necesites */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+button.right {
+    right: 10px; /* Ajusta el valor según necesites */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.slider {
+    overflow: hidden;
+    background-color: white;
+    margin: 0 15px;
+    height: 80px;
+    width: 20px;
+    border-radius: 30px;
+    box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.1), -15px -15px 30px #fff,
+    inset -5px -5px 10px rgba(0, 0, 255, 0.1),
+    inset 5px 5px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.slider::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    border-radius: 100%;
+    box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0.3), 0px 420px 0 400px #2697f3,
+    inset 0px 0px 0px rgba(0, 0, 0, 0.1);
+    animation: animate_2 2.5s ease-in-out infinite;
+    animation-delay: calc(-0.5s * var(--i));
+}
+
+@keyframes animate_2 {
+    0% {
+        transform: translateY(250px);
+        filter: hue-rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(250px);
+        filter: hue-rotate(180deg);
+    }
+}
+
+/* Estilo para el botón "Copy" */
+.copy {
+    margin-left: 20px; /* Ajusta el valor según necesites */
+    background-color: #e0e8ef; /* Color de fondo del botón */
+    color: #7e97b8; /* Color del texto del botón */
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgba(255, 255, 255, 0.333);
+    border-radius: 40px; /* Borde redondeado para que coincida con los otros botones */
+    padding: 16px 24px; /* Ajusta el padding del botón */
+    box-shadow: -4px -2px 16px 0px #ffffff, 4px 2px 16px 0px rgb(95 157 231 / 48%);
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+    outline: none;
+    position: relative; /* Cambiado a relativo para evitar superposición */
+    display: inline-block; /* Asegura que se alinee en línea con otros elementos */
+}
+
+.copy:hover,
+.copy:focus {
+    background-color: #E5EDF5;
+    color: #516d91;
+    box-shadow: -2px -1px 8px 0px #ffffff, 2px 1px 8px 0px rgb(95 157 231 / 48%);
+}
+
+.copy:active {
+    box-shadow: none;
+}
+
+.copy:hover svg,
+.copy:focus svg {
+    color: #516d91;
+}
+
+/* Restablecer los estilos originales del tooltip */
+.tooltip {
+    position: absolute;
+    opacity: 0;
+    visibility: 0;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font: 12px Menlo, Roboto Mono, monospace;
+    color: rgb(50, 50, 50);
+    background: #f4f3f3;
+    padding: 7px;
+    border-radius: 4px;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.tooltip::before {
+    content: attr(data-text-initial);
+}
+
+.tooltip::after {
+    content: "";
+    position: absolute;
+    bottom: -3.5px;
+    width: 7px;
+    height: 7px;
+    background: inherit;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    z-index: -999;
+    pointer-events: none;
+}
+
+/* Ocultar el checkmark por defecto */
+.checkmark {
+    display: none;
+}
+
+/* Mostrar tooltip y cambiar iconos al hacer hover/focus */
+.copy:hover .tooltip,
+.copy:focus .tooltip {
+    opacity: 1;
+    visibility: visible;
+    top: -calc(100% + 8px);
+}
+
+.copy:focus .tooltip::before {
+    content: attr(data-text-end);
+}
+
+.copy:focus .clipboard {
+    display: none;
+}
+
+.copy:focus .checkmark {
+    display: block;
+}
+
+.copy:active {
+    outline: 1px solid rgb(141, 141, 141);
+}
+
